@@ -33,11 +33,11 @@ jobs:
 
     # --- Test scribd.com ---
     - name: Run scribd-dl for a scribd file
-      run: npm start "https://www.scribd.com/doc/249398282/The-Minds-of-Billy-Milligan-Daniel-Keyes"
+      run: npm start "https://www.scribd.com/doc/8286154/Free-eBook-Retire-Happy-Wild-and-Free"
 
     - name: Verify scribd file exists
       run: |
-        if [ ! -f "./output/The-Minds-of-Billy-Milligan-Daniel-Keyes.pdf" ]; then
+        if [ ! -f "./output/Free-eBook-Retire-Happy-Wild-and-Free.pdf" ]; then
           echo "Download failed: scribd file not found!"
           exit 1
         else
