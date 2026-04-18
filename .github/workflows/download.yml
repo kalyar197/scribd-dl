@@ -1,0 +1,45 @@
+name: Download Document
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: 'Document URL (Scribd/SlideShare/Everand)'
+        required: true
+        type: string
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Download document
+        run: npm start "${{ github.event.inputs.url }}"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: document-${{ github.run_number }}
+          path: output/*
+          retention-days: 7
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: download-${{ github.run_number }}
+          name: Download ${{ github.run_number }}
+          body: |
+            Downloaded from: ${{ github.event.inputs.url }}
+            Generated: ${{ github.event.repository.updated_at }}
+          files: output/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

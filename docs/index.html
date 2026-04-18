@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scribd Downloader</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Scribd Downloader</h1>
+        <p class="subtitle">Download documents from Scribd, SlideShare, and Everand</p>
+
+        <div id="setup-section" class="section">
+            <h2>Setup</h2>
+            <p>Enter your GitHub Personal Access Token (PAT) with <code>repo</code> and <code>actions</code> scope.</p>
+            <div class="input-group">
+                <input type="password" id="pat-input" placeholder="ghp_xxxxxxxxxxxx">
+                <button id="save-pat-btn">Save Token</button>
+            </div>
+            <p class="hint">Token is stored locally in your browser. <a href="https://github.com/settings/tokens/new?scopes=repo,workflow" target="_blank">Create a token</a></p>
+        </div>
+
+        <div id="download-section" class="section hidden">
+            <h2>Download</h2>
+            <div class="input-group">
+                <input type="url" id="url-input" placeholder="https://www.scribd.com/document/...">
+                <button id="download-btn">Download</button>
+            </div>
+            <div id="service-indicator" class="service-indicator hidden"></div>
+        </div>
+
+        <div id="status-section" class="section hidden">
+            <h2>Status</h2>
+            <div id="status-message" class="status-message"></div>
+            <div class="progress-bar">
+                <div id="progress-fill" class="progress-fill"></div>
+            </div>
+            <div id="download-link" class="download-link hidden">
+                <a id="result-link" href="#" target="_blank">Download PDF</a>
+            </div>
+        </div>
+
+        <div id="error-section" class="section hidden">
+            <div id="error-message" class="error-message"></div>
+        </div>
+
+        <div class="footer">
+            <button id="clear-token-btn" class="link-btn">Clear saved token</button>
+        </div>
+    </div>
+
+    <script src="js/github.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
